@@ -1,0 +1,28 @@
+{
+  "appName": "Djezzy Business",
+  "helloWorld": "Salut Monde!",
+
+  "descVerifyNumber": "Vérifier votre numéro de téléphone!",
+  "descInsertNumber": "Merci d'inserer votre numéro de Téléphone",
+
+  "errTitle": "Erreur",
+
+  "errDescUnknown": "Un problème est survenu! Veuillez réessayer.",
+  "errDescNetwork": "Veuillez vérifier que vous êtes bien connecté.",
+  "errDescIllegibility": "Cette action n'est pas disponible.",
+  "errDescMaxReached": "Le nombre de transactions limitées par jour atteint.",
+  "errDescNoBalance": "Votre crédit est insuffisant pour effectuer cette opération.",
+  "errDescBlockedAccount": "Votre compte est bloqué",
+  "errDescIncorrectPin": "Le code introduit est incorrect. Veuillez réessayer.",
+  "errDescIncorrectMsisdn": "Le numéro inséré est incorrect. Veuillez vérifier le numéro.",
+
+  "descInsertPin": "Veuillez saisir votre code PIN :",
+
+  "menuItemHome": "Home",
+  "menuItemInvoices": "Factures",
+  "menuItemOffers": "Offres",
+  "menuItemCompanies": "Compagnies",
+  "menuItemFlotte": "Flotte",
+  "menuItemLanguage": "Langues",
+  "menuItemFaq": "FAQ"
+}
