@@ -35,13 +35,15 @@ class DrawerItem extends StatelessWidget implements DialogInterface {
           style: Get.theme.textTheme.headlineLarge?.copyWith(fontSize: 15),
         ),
         onTap: () {
-          Get.back();
+         // Get.back();
           if (item == NavDrawer.languageItem) {
             Get.bottomSheet(
-              const LanguagePage(),
-              exitBottomSheetDuration: const Duration(milliseconds: 400),
-              enterBottomSheetDuration: const Duration(milliseconds: 400),
-            );
+    const LanguagePage(),
+    exitBottomSheetDuration: const Duration(milliseconds: 400),
+    enterBottomSheetDuration: const Duration(milliseconds: 400),
+    isScrollControlled: true,
+    backgroundColor: Colors.transparent,
+  );
           }
           else if (item == NavDrawer.disconnectItem) {
             showModalBottomSheet(
