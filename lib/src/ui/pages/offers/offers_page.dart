@@ -184,15 +184,16 @@ class _OffersPageState extends BasePageState<OffersPage>
       list.add(GestureDetector(
           onTap: () {
             showModalBottomSheet(
+              
                 context: context,
                 isScrollControlled: true,
                 backgroundColor: Colors.transparent,
                 builder: (BuildContext bc) {
                   return OfferDialog(
-                    listener: this,
-                    key: offerDialog,
-                    package: p,
-                  );
+                   listener: this,
+                   key: offerDialog,
+                   package: p,
+                                        );
                 });
           },
           child: OfferItem(p)));
