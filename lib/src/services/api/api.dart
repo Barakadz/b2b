@@ -47,6 +47,10 @@ class Api {
     dio.interceptors.add(ApiInterceptor(dio, refresh, authenticate));
 
     //Send request
+
+    print("url is ================================================================>$url");
+    print("queryParameters is ================================================================>$params");
+    print("options is ================================================================>${Options(responseType: ResponseType.plain)}");
     final response = await dio
         .get(
           url,

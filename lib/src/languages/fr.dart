@@ -138,5 +138,5 @@ Map<String, String> fr = {
   "searchFloat": "Recherche",
   "connect": "Connecter",
   "swap": "Swaper",
-  "shop": "Boutiques"
+  "shop": "Entreprise"
 };

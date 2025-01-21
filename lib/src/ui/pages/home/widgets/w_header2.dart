@@ -53,7 +53,7 @@ class HomeHeader2 extends StatelessWidget {
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(
+                               Text(
                                 'myBalance'.tr,
                                 style: Get.theme.primaryTextTheme.bodyMedium
                                     ?.copyWith(height: 2),

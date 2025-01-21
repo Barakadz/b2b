@@ -5,8 +5,23 @@ import 'package:business/src/ui/pages/navigator/widgets/navigation_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+
+class Offres{
+  Map ?question;
+  String ?type;
+  Map ?response;
+
+Offres({this.question, this.type,this.response});
+
+
+}
+
+
+
+
 class FaqPage extends StatelessWidget {
-  const FaqPage({super.key});
+ // Offres test =Offres(type: "Ligne",question: {"fr":"Code PIN / PUK oublié?","ar":"","en":""},response: {"fr":"Si vous entrez trois fois un code PIN de maniére erronée, votre carte SIM sera automatiquement bloquée. Dés lors, vous devrez utiliser votre code PUK qui se trouve à l'intérieur de l'emballage d'origine. Veuillez le conserver","ar":"","en":""});
+    const FaqPage({super.key});
 
   IconData _getIcon(String item) {
     switch (item) {
@@ -76,7 +91,7 @@ class FaqPage extends StatelessWidget {
                 ),
               ),
             ),
-            body: const FaqList(),
+            body:  FaqList(),
           ),
         ),
       ),

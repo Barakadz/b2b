@@ -170,6 +170,15 @@ class UserRepository {
       var body = {
         "data": {"id": "$code", "type": "products"}
       };
+print("||");
+print("||");
+print("codeis========================================================>$code");
+print("||");
+print("||");
+print("||");
+
+
+
 
       final response = await Api.postRequestAuthenticated(
           "${await InformationRetriever.getInfoUrl()}/$msisdn/subscription-product",

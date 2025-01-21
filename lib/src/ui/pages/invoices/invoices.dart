@@ -64,6 +64,7 @@ class InvoicesPage extends StatelessWidget {
                                       type: ClickAction.reloadInvoices),
                                 ),
                               )
+                              //if pas de facture === c'est à dire if sim card is prépaid
                             : _controller.invoices.isEmpty
                                 ? Expanded(
                                     child: Center(

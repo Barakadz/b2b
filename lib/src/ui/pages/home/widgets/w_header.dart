@@ -95,8 +95,8 @@ class HomeHeader extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(
-                                'myBalance'.tr,
+                               Text(
+                                'myBalance',
                                 style: Get.theme.primaryTextTheme.bodyMedium
                                     ?.copyWith(height: 2),
                               ),

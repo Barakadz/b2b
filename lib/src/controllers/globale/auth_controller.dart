@@ -41,6 +41,7 @@ class AuthController extends BaseController {
         ApimResponse? response = await UserRepository.getInfo(
             null, [Api.connectedVal, Api.illegibilityVal]);
         subscriber = response!.subscriber!;
+        print("Subscriber Balance=================================================>${subscriber.balance}");
         if (response.includes!.isNotEmpty) {
           List<Package> packs = [];
           for (var include in response.includes!) {

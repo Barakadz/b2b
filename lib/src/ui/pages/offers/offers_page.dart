@@ -115,6 +115,7 @@ class _OffersPageState extends BasePageState<OffersPage>
                     : Container();
               },
             ),
+//card of offres
             Expanded(
               child: RefreshIndicator(
                 key: refreshIndicator,
@@ -123,10 +124,11 @@ class _OffersPageState extends BasePageState<OffersPage>
                   id: "selected",
                   builder: (ctrl) {
                     return ListWheelScrollView(
-                      itemExtent: 220,
+                     
+                       itemExtent: 220,
                       physics: const FixedExtentScrollPhysics(),
                       controller: ctrl.listController,
-                      diameterRatio: 3,
+                      diameterRatio: 4,
                       children: getPackages(ctrl),
                     );
                   },
@@ -157,6 +159,8 @@ class _OffersPageState extends BasePageState<OffersPage>
 
   @override
   void onClick(Key? key, ClickType clickType) {
+    print("click sur Activate");
+    print("package : ${offerDialog}");
     if (key == offerDialog) {
       if (clickType == ClickType.positive) {
         Get.find<OffersController>()

@@ -9,26 +9,30 @@ import 'package:business/src/repositories/care_repository.dart';
 
 import 'package:business/src/controllers/base_controller.dart';
 
-class FleetController extends BaseController {
+  class FleetController extends BaseController {
 
   var subscribers = <Subscriber>[].obs;
 
   var selected = -1;
   var loadingSubscriber = false;
-
   reload(bool force) async {
+print("------------------------------------------------------------------reload function start");
 
     if(result.status == Status.starting || (subscribers.isNotEmpty && !force)) {
       return;
     }
+print("------------------------------------------------------------------reload function fin");
+print("------------------------------------------------------------------Starting status");
 
     //Set status to starting
     updateStatus(Pair(Status.starting, Reason.idle));
+print("------------------------------------------------------------------Fin status");
+print("------------------------------------------------------------------Starting Reload");
 
     //Reload Data
     await Future.delayed(const Duration(seconds: 5));
     subscribers.value = (await CareRepository.getFleet(null))?.subscribers ?? [];
-
+print("------------------------------------------------------------------Fin reload");
     //Update interface
     update(["FleetList"]);
 
@@ -37,6 +41,7 @@ class FleetController extends BaseController {
   }
 
   select(int selected) async {
+print("------------------------------------------------------------------Select function");
 
     //Get fleet dialog controller
     var ctrl = Get.find<FleetDialogController>();

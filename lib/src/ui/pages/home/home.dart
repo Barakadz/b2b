@@ -6,6 +6,7 @@ import 'package:business/src/ui/pages/home/widgets/w_package_empty.dart';
 import 'package:business/src/ui/pages/home/widgets/w_packages_list.dart';
 import 'package:business/src/ui/pages/home/widgets/w_quick_actions.dart';
 import 'package:business/src/ui/pages/navigator/widgets/navigation_drawer.dart';
+import 'package:business/src/ui/pages/notification/notifications.dart';
 import 'package:business/src/ui/widgets/circle_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -52,9 +53,11 @@ class HomePage extends StatelessWidget {
           actions: [
             Container(
               margin: const EdgeInsets.only(right: 10),
-              child: const Icon(
-                Icons.notifications,
-                size: 25,
+              child: InkWell(
+                 child: const Icon(
+                  Icons.notifications,
+                  size: 25,
+                ),
               ),
             ),
           ],

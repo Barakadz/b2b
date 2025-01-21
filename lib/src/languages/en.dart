@@ -142,5 +142,5 @@ Map<String, String> en = {
   "searchFloat": "Search",
   "connect": "Connecter",
   "swap": "Swap",
-  "shop": "Shops"
+  "shop": "Company"
 };

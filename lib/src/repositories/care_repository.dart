@@ -20,17 +20,27 @@ class CareRepository {
     try {
       //Check number
       var msisdn = await Preferences.getMobileNumber();
+      print("msisdn==================================================================================>$msisdn");
+      print("$presenter");
       if (msisdn == null) {
         presenter != null
             ? presenter.updateStatus(Pair(Status.error, Reason.notAllowed))
             : throw BadRequestException();
       }
-
+print("msisdn is not null");
       final response = await Api.getRequest(
           "${await InformationRetriever.getCareUrl()}/$msisdn",
           true,
           true,
           {"type": "fleet"});
+          print("response is :");
+          print("||");
+          print("||");
+          print("||");
+          print("||");
+          print("||");
+          print("||");
+          print(response);
       return UssdResponse.fromJson(jsonDecode(response));
     } catch (e) {
       if (e is BadRequestException || e is UnauthorizedException) {
