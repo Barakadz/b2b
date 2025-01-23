@@ -58,6 +58,15 @@ class Api {
           options: Options(responseType: ResponseType.plain),
         )
         .timeout(const Duration(seconds: 10));
+        print("++++++++++++++++++++++++++");
+        print("++++++++++++++++++++++++++");
+        print("++++++++++++++++++++++++++");
+        print("++++++++++++++++++++++++++");
+        print("$response");
+        print("++++++++++++++++++++++++++");
+        print("++++++++++++++++++++++++++");
+        print("++++++++++++++++++++++++++");
+
     return process(response);
   }
 

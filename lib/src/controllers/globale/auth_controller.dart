@@ -4,6 +4,7 @@ import 'package:business/src/models/dbss/package.dart';
 import 'package:business/src/models/dbss/product.dart';
 import 'package:business/src/models/dbss/subscription_type.dart';
 import 'package:business/src/models/enums/category.dart';
+import 'package:business/src/models/enums/payment_type.dart';
 import 'package:business/src/models/il/Subscriber.dart';
 import 'package:business/src/models/response/apim_response.dart';
 import 'package:get/get.dart';
@@ -29,7 +30,7 @@ class AuthController extends BaseController {
   List<Package> connectedProducts = [];
   late SubscriptionType subscriptionType;
   List<Product> services = [];
-
+PaymentType ?paymentType;
   loadSubscriber() async {
     //Request to display message on SplashScreen
     updateStatus(Pair(Status.starting, Reason.idle));
@@ -42,7 +43,9 @@ class AuthController extends BaseController {
             null, [Api.connectedVal, Api.illegibilityVal]);
         subscriber = response!.subscriber!;
         print("Subscriber Balance=================================================>${subscriber.balance}");
-        if (response.includes!.isNotEmpty) {
+                print("Payement type=================================================>${subscriber.paymentType}");
+ paymentType=subscriber.paymentType;
+         if (response.includes!.isNotEmpty) {
           List<Package> packs = [];
           for (var include in response.includes!) {
             if (include.type == Api.connectedVal) {

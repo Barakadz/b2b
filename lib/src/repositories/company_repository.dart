@@ -6,25 +6,42 @@ import 'package:business/src/services/native/preferences.dart';
 import 'package:dio/dio.dart';
 import 'package:image_picker/image_picker.dart';
 
-const msisdn = '0542530498';
-const baseUrl = 'http://192.168.43.115:8001/api/v1/$msisdn/user';
-const companyId = '5';
+const msisdn = '0545230498';
+const baseUrl = 'http://192.168.198.36:8000/api/v1/$msisdn/user';
+const companyId = '1202';
 
 class CompanyRepository {
   static Future<Map<String, dynamic>> getCompanies(
       {int? pageNumber, String? search, int? categoryId}) async {
     try {
       // var msisdn = await Preferences.getMobileNumber();
+
+      print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+      print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+      print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+      print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+      print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+      print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+      print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+
+
+      print("pageNumber=============$pageNumber");
+      print("search=============$search");
+      print("pageNumber=============$categoryId");
+      print("response========================================================>start response");
+
       var response = await Api.getRequest(
         '$baseUrl/clients',
         true,
         true,
-        {
+   
+              {
           'pageNumber': pageNumber,
           'search': search,
-          'categoryId': categoryId,
-        },
+          'categoryId': 1,
+        }    ,    
       );
+      print("response========================================================>$response");
       return json.decode(response);
     } catch (exception) {
       if (exception is DioException) {
@@ -73,12 +90,28 @@ class CompanyRepository {
 
   static Future<bool> userCanAddCompany() async {
     try {
+      print("|");
+      print("|");
+      print("|");
+      print("|");
+      print("|");
+      print("|");
+      print("|");
+      print("userCanAddCompany");
       var response = await Api.getRequest(
         '$baseUrl/clients/userCanAddClient/$companyId',
         true,
         true,
         {},
       );
+            print("µ");
+      print("µ");
+      print("%");
+      print("|");
+      print("userCanAddCompany==========================================>$response");
+      print("|");
+      print("|");
+
       return json.decode(response)?['data'] ?? false;
     } catch (exception) {
       return false;
@@ -116,8 +149,22 @@ class CompanyRepository {
   static Future<Map<String, dynamic>> getActivityCategories() async {
     try {
       // var msisdn = await Preferences.getMobileNumber();
+ print("|");
+          print("|");
+           print("|");
+          print("|");
+      print("getActivityCategories function Start ");
       var response =
-          await Api.getRequest('$baseUrl/activityCategories', true, true, {});
+          await Api.getRequest('$baseUrl/activityDomains', true, true, {});
+          print("|");
+                    print("|");
+          print("|");
+          print("|");
+          print("activitydomain $response");
+          print("|");
+          print("|");
+          print("|");
+
       return json.decode(response);
     } catch (exception) {
       if (exception is DioException) {

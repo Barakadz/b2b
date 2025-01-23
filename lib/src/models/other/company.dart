@@ -144,6 +144,6 @@ class Company {
   }
 
   getCompanyLogoUrl() {
-    return 'http://192.168.43.115:8001/$companyLogo';
+    return 'http://127.0.0.1:8000/$companyLogo';
   }
 }

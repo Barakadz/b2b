@@ -242,13 +242,13 @@ class _CompaniesScreenState extends State<CompaniesScreen> {
                     const SizedBox(
                       height: 10,
                     ),
-                    Padding(
+                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 5),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Skeletonizer(
+                          Skeletonizer(//package loading
                             enabled: companiesController2.isLoadingCategoryList,
                             child: Text(
                               '${companiesController2.total} companies',

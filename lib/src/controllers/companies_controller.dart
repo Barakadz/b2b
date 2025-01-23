@@ -57,12 +57,28 @@ class CompaniesController extends BaseController
 
   void getCompanies(int pageKey) async {
     try {
+      print("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||");
+      print("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||");
+      print("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||");
+      print("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||");
+      print("getCompanies start");
+      print("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||");
+      print("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||");
+      print("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||");
+      print("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||");
+      print("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||");
+      print("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||");
+
       isLoadingCompanyList = true;
+            print("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||entrer dans le data");
+
       Map<String, dynamic> data = await CompanyRepository.getCompanies(
         pageNumber: pageKey,
         search: search.value,
         categoryId: selectedCategoryId,
-      );
+      );    
+      print("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||$data");
+
       CompaniesResponse companiesResponse = CompaniesResponse.fromJson(data);
       total = companiesResponse.total!;
       update();
@@ -76,7 +92,7 @@ class CompaniesController extends BaseController
         pagingController.appendPage(companiesResponse.data ?? [], nextPageKey);
       }
       isLoadingCompanyList = false;
-      // update();
+       update();
     } on DataFormatException catch (e) {
       if (e.toString() == 'INVALID_VALUE') {
         generateError(Pair(Status.error, Reason.unknown));
@@ -87,7 +103,7 @@ class CompaniesController extends BaseController
       generateError(Pair(Status.error, Reason.unknown));
     } finally {
       isLoadingCompanyList = false;
-      // update();
+       update();
     }
   }
 

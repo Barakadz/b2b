@@ -63,7 +63,7 @@ class NavDrawer extends StatelessWidget {
                       style: Get.theme.primaryTextTheme.displayMedium
                           ?.copyWith(fontSize: 18, fontWeight: FontWeight.bold),
                     ),
-                    Text(
+                     Text(
                       _authController.subscriber.msisdn ?? '',
                       style: Get.theme.primaryTextTheme.displayMedium?.copyWith(
                           fontSize: 15, fontWeight: FontWeight.normal),
@@ -73,44 +73,46 @@ class NavDrawer extends StatelessWidget {
               ),
             ),
             Expanded(
-              child: ListView(
-                padding: EdgeInsets.zero,
-                children: <Widget>[
-                  DrawerItem(
-                    item: homeItem,
-                    desc: 'menuItemHome'.tr,
-                  ),
-                  DrawerItem(
-                    item: invoicesItem,
-                    desc: 'menuItemInvoices'.tr,
-                  ),
-                  DrawerItem(
-                    item: offersItem,
-                    desc: 'menuItemOffers'.tr,
-                  ),
-                  DrawerItem(
-                    item: companiesItem,
-                    desc: 'menuItemCompanies'.tr,
-                  ),
-                  DrawerItem(
-                    item: flotteItem,
-                    desc: 'menuItemFlotte'.tr,
-                  ),
-                  DrawerItem(
-                    item: languageItem,
-                    desc: 'menuItemLanguage'.tr,
-                  ),
-                  DrawerItem(
-                    item: faqItem,
-                    desc: 'menuItemFaq'.tr,
-                  ),
-                  DrawerItem(
-                    item: disconnectItem,
-                    desc: 'menuItemDisconnect'.tr,
-                  ),
-                ],
-              ),
-            ),
+  child: ListView(
+    padding: EdgeInsets.zero,
+    children: <Widget>[
+      DrawerItem(
+        item: homeItem,
+        desc: 'menuItemHome'.tr,
+      ),
+      if (_authController.paymentType == 'PaymentType.prepaid') 
+        DrawerItem(
+          item: invoicesItem,
+          desc: 'menuItemInvoices'.tr,
+        ),
+      DrawerItem(
+        item: offersItem,
+        desc: 'menuItemOffers'.tr,
+      ),
+      DrawerItem(
+        item: companiesItem,
+        desc: 'menuItemCompanies'.tr,
+      ),
+      DrawerItem(
+        item: flotteItem,
+        desc: 'menuItemFlotte'.tr,
+      ),
+      DrawerItem(
+        item: languageItem,
+        desc: 'menuItemLanguage'.tr,
+      ),
+      DrawerItem(
+        item: faqItem,
+        desc: 'menuItemFaq'.tr,
+      ),
+      DrawerItem(
+        item: disconnectItem,
+        desc: 'menuItemDisconnect'.tr,
+      ),
+    ],
+  ),
+)
+,
             Container(
               width: double.infinity,
               margin: const EdgeInsets.all(16.0),
