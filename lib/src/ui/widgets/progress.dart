@@ -6,9 +6,11 @@ class ProgressLoaderWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CircularProgressIndicator(
-      strokeWidth: 2.0,
-      valueColor: AlwaysStoppedAnimation(Get.theme.indicatorColor),
-    );
+    return  Image.asset(
+                "assets/images/logo_animated.gif",
+                fit: BoxFit.contain,
+                width: Get.width * 0.4,
+                height: Get.width * 0.4,
+              );
   }
 }

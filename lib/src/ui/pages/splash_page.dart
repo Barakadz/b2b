@@ -16,39 +16,31 @@ class SplashPage extends StatefulWidget {
 class _SplashPageState extends BasePageState<SplashPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Expanded(
-              child: Image.asset(
+   return Scaffold(
+  body: SafeArea(
+    child: Center(  // This will center the child vertically and horizontally
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 30.0),  // Simplified padding
+        child: GetBuilder<AuthController>(
+          id: "loader",
+          builder: (ctrl) {
+            if (ctrl.isLoading()) {
+              return Image.asset(
+                "assets/images/logo_animated.gif",
                 fit: BoxFit.contain,
-                "assets/images/ic_logo.png",
-                width: Get.width * 0.25,
-                height: Get.width * 0.25,
-              ),
-            ),
-            Center(
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(30.0, 0.0, 30.0, 0.0),
-                child: GetBuilder<AuthController>(
-                    id: "loader",
-                    builder: (ctrl) {
-                      if (ctrl.isLoading()) {
-                        return const ProgressLoaderWidget();
-                      } else {
-                        onStatusChanged(ctrl.result);
-                        return const SizedBox();
-                      }
-                    }),
-              ),
-            ),
-            const Expanded(child: SizedBox()),
-          ],
+                width: Get.width * 0.4,
+                height: Get.width * 0.4,
+              );
+            } else {
+              onStatusChanged(ctrl.result);
+              return const SizedBox();  // Optionally return an empty widget when not loading
+            }
+          }
         ),
       ),
-    );
+    ),
+  ),
+);
+
   }
 }
