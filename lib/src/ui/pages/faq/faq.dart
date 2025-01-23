@@ -26,15 +26,15 @@ class FaqPage extends StatelessWidget {
   IconData _getIcon(String item) {
     switch (item) {
       case 'line':
-        return Icons.phone;
+        return Icons.phone_outlined;
       case 'service':
-        return Icons.settings;
+        return Icons.settings_outlined;
       case 'internet':
-        return Icons.four_g_mobiledata;
+        return Icons.four_g_mobiledata_outlined;
       case 'contact':
-        return Icons.numbers;
+        return Icons.numbers_outlined;
       default:
-        return Icons.question_mark;
+        return Icons.question_mark_outlined;
     }
   }
 
