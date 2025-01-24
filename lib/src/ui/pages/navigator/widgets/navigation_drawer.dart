@@ -2,13 +2,11 @@ import 'package:business/src/assets/colors.dart';
 import 'package:business/src/controllers/navigation_controller.dart';
 import 'package:business/src/ui/pages/language/language.dart';
 import 'package:business/src/ui/pages/navigator/widgets/generic_dialog.dart';
-import 'package:business/src/ui/pages/navigator/widgets/navigation_drawer_item.dart';
-import 'package:flutter/material.dart';
+ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:business/src/controllers/globale/auth_controller.dart';
 import 'package:business/src/controllers/navigator/navigator_controller.dart';
-import 'package:business/src/ui/widgets/circle_image.dart';
-
+ 
 class NavDrawer extends StatelessWidget {
   static const int homeItem = 0;
   static const int invoicesItem = 1;
@@ -55,7 +53,8 @@ class NavDrawer extends StatelessWidget {
                   ),
                   image: DecorationImage(
                     image: AssetImage("assets/images/logo.png"),
-                    fit: BoxFit.cover,
+                    fit: BoxFit.contain,
+                    alignment: Alignment.centerRight,  // Align the image to the left
                     colorFilter: ColorFilter.mode(
                       CustomColors.secondaryColor.withOpacity(0.3),
                       BlendMode.dstATop,
@@ -237,8 +236,7 @@ Widget _buildDrawerItems(BuildContext context) {
               backgroundColor: Colors.transparent,
               builder: (BuildContext context) {
                 return GenericDialog(
-                  listener: DrawerItem(),
-                  title: 'titleConfirm'.tr,
+                   title: 'titleConfirm'.tr,
                   negative: 'actionCancel'.tr,
                   positive: 'actionConfirm'.tr,
                   message: 'descConfirmLogout'.tr,
