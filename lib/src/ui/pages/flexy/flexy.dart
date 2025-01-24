@@ -1,3 +1,4 @@
+import 'package:business/src/assets/colors.dart';
 import 'package:business/src/controllers/flexy/flexy_controller.dart';
 import 'package:business/src/models/enums/click_action.dart';
 import 'package:business/src/models/other/contact.dart';
@@ -15,24 +16,39 @@ class FlexyPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(80.0),
-        child: AppBar(
-          elevation: 0,
-          backgroundColor: Get.theme.primaryColor,
-          iconTheme: const IconThemeData(color: Colors.white),
-          title: Text(
-            "flexy".tr,
-            style: Get.theme.primaryTextTheme.bodyMedium
-                ?.copyWith(fontSize: 25, fontWeight: FontWeight.w600),
-          ),
-          centerTitle: true,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.vertical(
-                bottom: Radius.elliptical(Get.width, 90.0)),
-          ),
+    appBar:  PreferredSize(
+  preferredSize: const Size.fromHeight(80.0),
+  child: AppBar(
+    elevation: 0,
+    backgroundColor: Colors.transparent, // Make background transparent
+    flexibleSpace: Container(
+      decoration: BoxDecoration(
+        gradient: const LinearGradient(
+          colors: [
+           CustomColors.secondaryColor,
+          CustomColors.primaryColor
+          ],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
+        borderRadius: BorderRadius.vertical(
+          bottom: Radius.elliptical(Get.width, 90.0),
         ),
       ),
+    ),
+    iconTheme: const IconThemeData(color: Colors.white),
+    title: Text(
+      "flexy".tr,
+      style: Get.theme.primaryTextTheme.bodyMedium?.copyWith(
+        fontSize: 25, 
+        fontWeight: FontWeight.w600,
+      ),
+    ),
+    centerTitle: true,
+  ),
+)
+
+,
       body: Column(
         children: [
           Expanded(
@@ -91,7 +107,7 @@ class FlexyPage extends StatelessWidget {
       ),
       floatingActionButton: GetBuilder<FlexyController>(
         builder: (ctrl) => FloatingActionButton(
-            backgroundColor: Get.theme.primaryColor,
+            backgroundColor: CustomColors.secondaryColor,
             foregroundColor: Get.theme.cardColor,
             mini: true,
             onPressed: () => ctrl.openDialog(),
