@@ -105,6 +105,21 @@ class FlexyDialogController extends BaseController {
         receiver: TextHelper.internationalFormat(
             contacts.elementAt(selectedContact).number!),
         code: flexyOffers!.elementAt(selectedPackageIndex).code);
+        print("|");
+        print("|");
+        print("|");
+        print("|");
+        print("|");
+        print("|");
+        print("|");
+        print("transaction ====================================================>$t");
+        print("|");
+        print("|");
+        print("|");
+        print("|");
+        print("|");
+        print("|");
+        print("|");
     return t;
   }
 

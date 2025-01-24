@@ -19,7 +19,7 @@ class FlexyDialog extends StatelessWidget {
                 topRight: Radius.circular(20.0))),
         child: Wrap(
           children: [
-            AnimatedSize(
+             AnimatedSize(
               duration: const Duration(milliseconds: 200),
               reverseDuration: const Duration(milliseconds: 100),
               child: Container(
@@ -225,7 +225,7 @@ class FlexyDialog extends StatelessWidget {
                             Expanded(
                               child: ElevatedButton(
                                 onPressed: () {
-                                  ctrl.contacts.add(contact!);
+                               //  ctrl.contacts.add(contact!);
                                   Get.back(result: ctrl.getTransaction());
                                 },
                                 child: Text(

@@ -1,4 +1,6 @@
 
+import 'package:get/get.dart';
+ 
 class Name {
 
   final Map<String, dynamic>? text;
@@ -8,7 +10,8 @@ class Name {
   });
 
   String getValue(){
-    return text?["fr"] ?? "";
+    //language of phone
+    return text?[Get.locale?.languageCode] ?? "fr";
   }
 
   factory Name.fromJson(Map<String, dynamic>? json) {

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class CustomColors extends ThemeExtension<CustomColors> {
-
+  static const Color secondaryColor = Color.fromRGBO(255, 61, 102, 1);
+  static const Color primaryColor = Color.fromRGBO(226, 0, 26, 1);
   static Color tuna = const Color(0xFF333644);
   static Color zircon = const Color(0xFFFAFCFF);
   static Color paleSky = const Color(0xFF6A737C);

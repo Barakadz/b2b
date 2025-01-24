@@ -23,7 +23,15 @@ class _HomePackagesListState extends State<HomePackagesList> {
   void initState() {
     super.initState();
     packages = _authController.connectedProducts;
-  }
+    print("|");
+    print("|");
+    print("|");
+    print("|");
+    print("|");
+    print("|");
+    print("|");
+    print("package: ${packages![0].balances }");
+      }
 
   updateList(DraggableDetails detail) {
     if ((x2 - x1).abs() > Get.width * 0.50) {
