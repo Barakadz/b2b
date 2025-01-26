@@ -8,7 +8,7 @@
   "errTitle": "Erreur",
 
   "errDescUnknown": "Un problème est survenu! Veuillez réessayer.",
-  "errDescNetwork": "Veuillez vérifier que vous êtes bien connecté.",
+  "errDescNetwork": "Merci de vérifier que votre connexion Internet est bien établie.",
   "errDescIllegibility": "Cette action n'est pas disponible.",
   "errDescMaxReached": "Le nombre de transactions limitées par jour atteint.",
   "errDescNoBalance": "Votre crédit est insuffisant pour effectuer cette opération.",

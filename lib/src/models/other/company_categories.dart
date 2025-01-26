@@ -5,8 +5,23 @@ class CompanyCategories {
   CompanyCategories({this.data});
 
   factory CompanyCategories.fromJson(Map<String, dynamic> json) {
+    
+  print("µµµµµµµµµµµµµµµµµµµµµµµµµµ");
+        print("µµµµµµµµµµµµµµµµµµµµµµµµµµ");
+    print("µµµµµµµµµµµµµµµµµµµµµµµµµµ");
+    print("µµµµµµµµµµµµµµµµµµµµµµµµµµ");
+    print("µµµµµµµµµµµµµµµµµµµµµµµµµµ");
+    print("Data=====>${((json['result'] ?? []) as List)
+            .map((e) => CompanyCategory.fromJson(e))
+            .toList()}");
+    print("µµµµµµµµµµµµµµµµµµµµµµµµµµ");
+    print("µµµµµµµµµµµµµµµµµµµµµµµµµµ");
+    print("µµµµµµµµµµµµµµµµµµµµµµµµµµ");
+    print("µµµµµµµµµµµµµµµµµµµµµµµµµµ");
+    print("µµµµµµµµµµµµµµµµµµµµµµµµµµ");
+
     return CompanyCategories(
-        data: ((json['data'] ?? []) as List)
+        data: ((json['result'] ?? []) as List)
             .map((e) => CompanyCategory.fromJson(e))
             .toList());
   }

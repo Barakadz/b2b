@@ -13,6 +13,24 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+class CompanyCategory {
+  final int? id;
+  final String? code;
+  final String? name;
+  final int? parentId;
+
+  const CompanyCategory({this.id, this.code, this.name, this.parentId});
+
+  factory CompanyCategory.fromJson(Map<String, dynamic> json) {
+    return CompanyCategory(
+      id: json['id'] ?? 0,
+      code: json['code'] ?? '',
+      name: json['name'] ?? '',
+      parentId: json['parentId'] ?? 0,
+    );
+  }
+}
+
 class CompaniesScreen extends StatefulWidget {
   const CompaniesScreen({super.key});
   @override
@@ -26,6 +44,7 @@ class _CompaniesScreenState extends State<CompaniesScreen> {
 
   var userCanAddCompany = false;
   var userCanUpdateCompany = false;
+     List<CompanyCategory> companyCategories = [];
 
   @override
   void initState() {
@@ -35,6 +54,13 @@ class _CompaniesScreenState extends State<CompaniesScreen> {
   }
 
   Future<void> getCurrentUserCompanyInfo() async {
+
+
+
+
+
+
+    
     _currentUserCompanyController.getCurrentUserCompany();
     var userCanAddCompanyResult =
         await _currentUserCompanyController.userCanAddCompany();
@@ -42,6 +68,28 @@ class _CompaniesScreenState extends State<CompaniesScreen> {
         await _currentUserCompanyController.userCanUpdateCompany();
 
     setState(() {
+       companyCategories = [
+        CompanyCategory(
+          id: 4263,
+          code: "A",
+          name: "AGRICULTURE, CHASSE ET SYLVICULTURE",
+          parentId: 22,
+        ),
+        CompanyCategory(
+          id: 4264,
+          code: "B",
+          name: "INDUSTRIE MANUFACTURIÈRE",
+          parentId: 23,
+        ),
+        CompanyCategory(
+          id: 4265,
+          code: "C",
+          name: "CONSTRUCTION",
+          parentId: 24,
+        ),
+      ];
+   
+  
       userCanAddCompany = userCanAddCompanyResult;
       userCanUpdateCompany = userCanUpdateCompanyResult;
     });
@@ -111,7 +159,7 @@ class _CompaniesScreenState extends State<CompaniesScreen> {
                     const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
                 child: Column(
                   children: [
-                    Row(
+                     Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Flexible(
@@ -173,71 +221,88 @@ class _CompaniesScreenState extends State<CompaniesScreen> {
                                 width: 6,
                               ),
                             )
-                          : ListView.separated(
-                              scrollDirection: Axis.horizontal,
-                              itemCount:
-                                  companiesController2.companyCategories.length,
-                              itemBuilder: (context, index) => InkWell(
-                                onTap: () {
-                                  // if (!companiesController2
-                                  //         .isLoadingCompanyList &&
-                                  //     !companiesController2
-                                  //         .isLoadingCategoryList) {
-                                  companiesController2.onChangeSelectedCategory(
-                                    companiesController2
-                                            .companyCategories[index].id ??
-                                        0,
-                                  );
-                                  // }
-                                },
-                                child: Container(
-                                  padding: const EdgeInsets.symmetric(
-                                      vertical: 6, horizontal: 8),
-                                  decoration: BoxDecoration(
-                                    color:
-                                        companiesController2.isSelectedCategory(
-                                                companiesController2
-                                                    .companyCategories[index])
-                                            ? Colors.white
-                                            : Colors.white,
-                                    borderRadius: BorderRadius.circular(6),
-                                    border: Border.all(
-                                      color: companiesController2
-                                              .isSelectedCategory(
-                                                  companiesController2
-                                                      .companyCategories[index])
-                                          ? Get.theme.primaryColor
-                                          : Colors.grey.shade400,
-                                    ),
-                                  ),
-                                  child: Center(
-                                    child: Text(
-                                      companiesController2
-                                              .companyCategories[index].name ??
-                                          '',
-                                      maxLines: 2,
-                                      overflow: TextOverflow.ellipsis,
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 12,
-                                        letterSpacing: 1,
-                                        color: companiesController2
-                                                .isSelectedCategory(
+                          : Column(
+                            children: [
+ Text('ID: ${  companiesController2.companyCategories[0].id} - Parent ID: ${  companiesController2.companyCategories[0].parentId}'),                              ListView.builder(
+        itemCount: companyCategories.length,
+        itemBuilder: (context, index) {
+          final category = companyCategories[index];
+          return ListTile(
+            leading: CircleAvatar(
+              child: Text(category.code ?? '?'),
+            ),
+            title: Text(category.name ?? 'No Name'),
+            subtitle: Text('ID: ${category.id} - Parent ID: ${category.parentId}'),
+          );
+        },
+      ),
+                              ListView.separated(
+                                  scrollDirection: Axis.horizontal,
+                                  itemCount:
+                                      companiesController2.companyCategories.length,
+                                  itemBuilder: (context, index) => InkWell(
+                                    onTap: () {
+                                      // if (!companiesController2
+                                      //         .isLoadingCompanyList &&
+                                      //     !companiesController2
+                                      //         .isLoadingCategoryList) {
+                                      companiesController2.onChangeSelectedCategory(
+                                        companiesController2
+                                                .companyCategories[index].id ??
+                                            0,
+                                      );
+                                      // }
+                                    },
+                                    child: Container(
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 6, horizontal: 8),
+                                      decoration: BoxDecoration(
+                                        color:
+                                            companiesController2.isSelectedCategory(
                                                     companiesController2
-                                                            .companyCategories[
-                                                        index])
-                                            ? Get.theme.primaryColor
-                                            : Colors.grey.shade800,
+                                                        .companyCategories[index])
+                                                ? Colors.black
+                                                : Colors.black,
+                                        borderRadius: BorderRadius.circular(6),
+                                        border: Border.all(
+                                          color: companiesController2
+                                                  .isSelectedCategory(
+                                                      companiesController2
+                                                          .companyCategories[index])
+                                              ? Colors.red
+                                              : Colors.green,
+                                        ),
+                                      ),
+                                      child: Center(
+                                        child: Text(
+                                          companiesController2
+                                                  .companyCategories[index].name ??
+                                              '',
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.w600,
+                                            fontSize: 12,
+                                            letterSpacing: 1,
+                                            color: companiesController2
+                                                    .isSelectedCategory(
+                                                        companiesController2
+                                                                .companyCategories[
+                                                            index])
+                                                ? Colors.yellow
+                                                : Colors.grey.shade800,
+                                          ),
+                                        ),
                                       ),
                                     ),
                                   ),
-                                ),
-                              ),
-                              separatorBuilder: (context, index) =>
-                                  const SizedBox(
-                                width: 6,
-                              ),
-                            ),
+                                  separatorBuilder: (context, index) =>
+                                      const SizedBox(
+                                    width: 6,
+                                  ),
+                                ),//end listview
+                            ],
+                          ),
                     ),
                     const SizedBox(
                       height: 10,

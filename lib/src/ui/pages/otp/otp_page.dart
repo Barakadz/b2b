@@ -48,7 +48,7 @@ class _OtpPageState extends BasePageState<OtpPage>
               Expanded(
                 child: Image.asset(
                   fit: BoxFit.contain,
-                  "assets/images/ic_logo.png",
+                  "assets/images/logo.png",
                   width: Get.width * 0.25,
                   height: Get.width * 0.25,
                 ),

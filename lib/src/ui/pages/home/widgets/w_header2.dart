@@ -1,13 +1,12 @@
 import 'dart:ui';
 
+import 'package:business/src/assets/colors.dart';
 import 'package:business/src/controllers/globale/auth_controller.dart';
 import 'package:business/src/helpers/text_helper.dart';
 import 'package:business/src/models/enums/unit.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
-
-import 'package:business/src/ui/widgets/circle_image.dart';
-import 'package:business/src/controllers/navigation_controller.dart';
+ 
 
 class HomeHeader2 extends StatelessWidget {
   HomeHeader2({super.key});
@@ -15,14 +14,14 @@ class HomeHeader2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 120,
+      height: 90,
       child: Stack(
         children: [
           Container(
             height: 70,
             margin: const EdgeInsets.only(top: 0),
             decoration: BoxDecoration(
-              color: Get.theme.primaryColor,
+              color: CustomColors.secondaryColor,
               borderRadius: BorderRadius.vertical(
                   bottom: Radius.elliptical(Get.width, 60.0)),
             ),

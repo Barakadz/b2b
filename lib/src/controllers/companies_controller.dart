@@ -81,6 +81,30 @@ class CompaniesController extends BaseController
 
       CompaniesResponse companiesResponse = CompaniesResponse.fromJson(data);
       total = companiesResponse.total!;
+                  print("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||entrer dans le data");
+            print("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||entrer dans le data");
+            print("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||entrer dans le data");
+            print("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||entrer dans le data");
+            print("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||entrer dans le data");
+            print("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||entrer dans le data");
+            print("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||entrer dans le data");
+            print("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||entrer dans le data");
+            print("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||entrer dans le data");
+            print("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||entrer dans le data");
+            print("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||entrer dans le data");
+            print("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||entrer dans le data");
+            print("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||entrer dans le data");
+            print("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||entrer dans le data");
+            print("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||entrer dans le data");
+            print("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||entrer dans le data");
+            print("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||entrer dans le data");
+            print("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||entrer dans le data");
+            print("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||entrer dans le data");
+            print("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||entrer dans le data");
+            print("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||entrer dans le data");
+            print("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||entrer dans le data");
+            print("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||$companiesResponse");
+
       update();
       final isLastPage =
           companiesResponse.currentPage! >= companiesResponse.lastPage!;
@@ -110,10 +134,24 @@ class CompaniesController extends BaseController
   void getActivityCategories() async {
     isLoadingCategoryList = true;
     update();
+  
     try {
       Map<String, dynamic> data =
           await CompanyRepository.getActivityCategories();
       companyCategories = CompanyCategories.fromJson(data).data ?? [];
+
+  print("µµµµµµµµµµµµµµµµµµµµµµµµµµ");
+        print("µµµµµµµµµµµµµµµµµµµµµµµµµµ");
+    print("µµµµµµµµµµµµµµµµµµµµµµµµµµ");
+    print("µµµµµµµµµµµµµµµµµµµµµµµµµµ");
+    print("µµµµµµµµµµµµµµµµµµµµµµµµµµ");
+    print("companyCategories======>${  companyCategories[0]}");
+    print("µµµµµµµµµµµµµµµµµµµµµµµµµµ");
+    print("µµµµµµµµµµµµµµµµµµµµµµµµµµ");
+    print("µµµµµµµµµµµµµµµµµµµµµµµµµµ");
+    print("µµµµµµµµµµµµµµµµµµµµµµµµµµ");
+    print("µµµµµµµµµµµµµµµµµµµµµµµµµµ");
+
       isLoadingCategoryList = false;
       update();
     } on DataFormatException catch (e) {

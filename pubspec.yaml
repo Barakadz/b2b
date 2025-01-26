@@ -49,6 +49,7 @@ dependencies:
   infinite_scroll_pagination: ^4.0.0
   shared_preferences: ^2.2.3
   flutter_multi_formatter: ^2.13.0
+ 
   # image: ^4.2.0
 
 dev_dependencies:

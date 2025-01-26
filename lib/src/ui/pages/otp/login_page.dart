@@ -1,3 +1,4 @@
+import 'package:business/src/assets/colors.dart';
 import 'package:business/src/controllers/otp/otp_controller.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
@@ -40,42 +41,63 @@ class _LoginPageState extends BasePageState<LoginPage>
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Expanded(
-                child: Image.asset(
-                  fit: BoxFit.contain,
-                  "assets/images/ic_logo.png",
-                  width: Get.width * 0.25,
-                  height: Get.width * 0.25,
-                ),
-              ),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
-                child: Text(
-                  'descInsertNumber'.tr,
-                  textAlign: TextAlign.center,
-                  style: Get.textTheme.headlineSmall,
-                ),
-              ),
+                Hero(
+                    tag: 'logo',
+                    child: Image.asset(
+                      "assets/images/logo.png",
+                      width: Get.width * 0.25,
+                      height: Get.width * 0.25,
+                      fit: BoxFit.contain,
+                    ),
+                  ),
+                  const SizedBox(height: 30),
+        
+                  // Title with enhanced typography
+                  Text(
+                    'descInsertNumber'.tr,
+                    textAlign: TextAlign.center,
+                    style: Get.textTheme.headlineSmall!.copyWith(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black87,
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+        
               SizedBox(
                 width: Get.width * 0.55,
-                child: Container(
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.blueGrey),
-                    borderRadius: const BorderRadius.all(Radius.circular(5)),
-                  ),
-                  child: Padding(
-                      padding: const EdgeInsets.all(7),
+                child:   Container(
+                    width: Get.width * 0.85,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(12),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.2),
+                          spreadRadius: 2,
+                          blurRadius: 5,
+                          offset: const Offset(0, 3),
+                        ),
+                      ],
+                      border: Border.all(color: CustomColors.secondaryColor, width: 1.5),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(15),
                       child: GetBuilder<LoginController>(
-                          id: "phoneNumber",
-                          builder: (ctrl) {
-                            return Text(
-                              textAlign: TextAlign.center,
-                              TextHelper.format(ctrl.phoneNumber),
-                              style: const TextStyle(fontSize: 22),
-                            );
-                          })),
-                ),
+                        id: "phoneNumber",
+                        builder: (ctrl) {
+                          return Text(
+                            TextHelper.format(ctrl.phoneNumber),
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 24,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.blue.shade800,
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                  ),
               ),
               const SizedBox(
                 height: 10,

@@ -7,7 +7,7 @@ import 'package:dio/dio.dart';
 import 'package:image_picker/image_picker.dart';
 
 const msisdn = '0545230498';
-const baseUrl = 'http://192.168.198.36:8000/api/v1/$msisdn/user';
+const baseUrl = 'http://192.168.139.36:8000/api/v1/$msisdn/user';
 const companyId = '1202';
 
 class CompanyRepository {

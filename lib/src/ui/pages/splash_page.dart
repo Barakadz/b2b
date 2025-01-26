@@ -17,26 +17,24 @@ class _SplashPageState extends BasePageState<SplashPage> {
   @override
   Widget build(BuildContext context) {
    return Scaffold(
-  body: SafeArea(
-    child: Center(  // This will center the child vertically and horizontally
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 30.0),  // Simplified padding
-        child: GetBuilder<AuthController>(
-          id: "loader",
-          builder: (ctrl) {
-            if (ctrl.isLoading()) {
-              return Image.asset(
-                "assets/images/logo_animated.gif",
-                fit: BoxFit.contain,
-                width: Get.width * 0.4,
-                height: Get.width * 0.4,
-              );
-            } else {
-              onStatusChanged(ctrl.result);
-              return const SizedBox();  // Optionally return an empty widget when not loading
-            }
+  body: Center(  // This will center the child vertically and horizontally
+    child: Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 30.0),  // Simplified padding
+      child: GetBuilder<AuthController>(
+        id: "loader",
+        builder: (ctrl) {
+          if (ctrl.isLoading()) {
+            return Image.asset(
+              "assets/images/logo_animated.gif",
+              fit: BoxFit.contain,
+              width: Get.width * 0.4,
+              height: Get.width * 0.4,
+            );
+          } else {
+            onStatusChanged(ctrl.result);
+            return const SizedBox();  // Optionally return an empty widget when not loading
           }
-        ),
+        }
       ),
     ),
   ),

@@ -63,7 +63,7 @@ class _MyAppState extends State<MyApp> {
 
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      title: "",
+      title: "Djezzy Business",
       translations: Translation(),
       locale: Locale(lang),
       fallbackLocale: const Locale('en'),

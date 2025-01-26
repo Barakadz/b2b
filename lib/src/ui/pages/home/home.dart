@@ -1,3 +1,4 @@
+import 'package:business/src/assets/colors.dart';
 import 'package:business/src/controllers/globale/auth_controller.dart';
 import 'package:business/src/ui/pages/home/widgets/w_banners_list.dart';
 import 'package:business/src/ui/pages/home/widgets/w_header.dart';
@@ -20,9 +21,8 @@ class HomePage extends StatelessWidget {
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(65.0),
         child: AppBar(
-          // toolbarHeight: 90,
           elevation: 0,
-          backgroundColor: Get.theme.primaryColor,
+          backgroundColor: CustomColors.secondaryColor,
           iconTheme: const IconThemeData(color: Colors.white),
           title: Row(
             mainAxisSize: MainAxisSize.min,
@@ -39,8 +39,7 @@ class HomePage extends StatelessWidget {
                 children: [
                   Text(
                     _authController.subscriber.firstName ?? 'welcome'.tr,
-                    style: Get.theme.primaryTextTheme.bodyMedium
-                        ?.copyWith(height: 2),
+                    style: Get.theme.primaryTextTheme.bodyMedium?.copyWith(height: 2),
                   ),
                   Text(
                     _authController.subscriber.msisdn ?? '',
@@ -54,7 +53,7 @@ class HomePage extends StatelessWidget {
             Container(
               margin: const EdgeInsets.only(right: 10),
               child: InkWell(
-                 child: const Icon(
+                child: const Icon(
                   Icons.notifications,
                   size: 25,
                 ),
@@ -67,22 +66,24 @@ class HomePage extends StatelessWidget {
       body: Center(
         child: Column(
           children: [
-             //HomeHeader(),
             HomeHeader2(),
             Expanded(
               child: SingleChildScrollView(
                 child: Column(
                   children: [
-                   GetBuilder<AuthController>(
+                                SizedBox(height: 20,),
+
+                    GetBuilder<AuthController>(
                       builder: (ctrl) => ctrl.connectedProducts.isNotEmpty
                           ? const HomePackagesList()
-                          : const PackageEmpty()),
-                          
-                    const SizedBox(
-                      height: 10,
+                          : const PackageEmpty(),
                     ),
+                    const SizedBox(height: 10),
                     const HomeQuickActions(),
-                    HomeBanners(),
+                     Padding(
+                       padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                       child: _buildNewsSection(),
+                     )
                   ],
                 ),
               ),
@@ -92,4 +93,97 @@ class HomePage extends StatelessWidget {
       ),
     );
   }
+
+
+  Widget _buildNewsSection() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              'Latest News',
+              style: Get.theme.textTheme.titleMedium?.copyWith(
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            TextButton(
+              onPressed: () {
+                // Navigate to more news
+              },
+              child: Text(
+                'More',
+                style: TextStyle(color: CustomColors.secondaryColor),
+              ),
+            ),
+          ],
+        ),
+        SizedBox(
+          height: 250,
+          child: ListView.builder(
+            scrollDirection: Axis.horizontal,
+            itemCount: 5,
+            itemBuilder: (context, index) {
+              return _buildNewsCard(index);
+            },
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildNewsCard(int index) {
+    return Column(
+      children: [
+        Container(
+          width: 300,
+          margin: const EdgeInsets.only(right: 16),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(12),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.2),
+                spreadRadius: 2,
+                blurRadius: 5,
+                offset: const Offset(0, 3),
+              ),
+            ],
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              ClipRRect(
+                borderRadius: const BorderRadius.vertical(top: Radius.circular(12)),
+                child: Image.asset(
+                  "assets/images/news.jpg",
+                  width: 300,
+                  height: 180,
+                  fit: BoxFit.cover,
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(12),
+                child: Text(
+                  'News Title ${index + 1}',
+                  style: Get.theme.textTheme.bodyLarge?.copyWith(
+                    fontWeight: FontWeight.bold,
+                  ),
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+            ],
+          ),
+        ),
+
+                  SizedBox(height: 20,)
+
+      ],
+    );
+  }
+
 }
+
+
