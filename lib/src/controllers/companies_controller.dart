@@ -17,14 +17,14 @@ class CompaniesController extends BaseController
   int currentPage = 1;
   int pageSize = 30;
   int total = 0;
-  bool isLoadingCompanyList = true;
+  var isLoadingCompanyList = true.obs;
   bool isCompaniesScrollingEnded = false;
   int? selectedCategoryId;
   // List<Company> companies = [];
   var search = ''.obs;
   // category variables
-  List<CompanyCategory> companyCategories = [];
-  bool isLoadingCategoryList = false;
+  RxList<CompanyCategory> companyCategories = <CompanyCategory>[].obs;
+  var isLoadingCategoryList =false.obs;
 
   @override
   void onInit() {
@@ -67,44 +67,18 @@ class CompaniesController extends BaseController
       print("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||");
       print("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||");
       print("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||");
-      print("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||");
-
-      isLoadingCompanyList = true;
-            print("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||entrer dans le data");
-
+ 
+      isLoadingCompanyList.value = true;
+ 
       Map<String, dynamic> data = await CompanyRepository.getCompanies(
         pageNumber: pageKey,
         search: search.value,
         categoryId: selectedCategoryId,
       );    
-      print("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||$data");
-
+ 
       CompaniesResponse companiesResponse = CompaniesResponse.fromJson(data);
       total = companiesResponse.total!;
-                  print("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||entrer dans le data");
-            print("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||entrer dans le data");
-            print("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||entrer dans le data");
-            print("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||entrer dans le data");
-            print("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||entrer dans le data");
-            print("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||entrer dans le data");
-            print("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||entrer dans le data");
-            print("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||entrer dans le data");
-            print("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||entrer dans le data");
-            print("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||entrer dans le data");
-            print("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||entrer dans le data");
-            print("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||entrer dans le data");
-            print("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||entrer dans le data");
-            print("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||entrer dans le data");
-            print("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||entrer dans le data");
-            print("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||entrer dans le data");
-            print("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||entrer dans le data");
-            print("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||entrer dans le data");
-            print("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||entrer dans le data");
-            print("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||entrer dans le data");
-            print("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||entrer dans le data");
-            print("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||entrer dans le data");
-            print("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||$companiesResponse");
-
+                 
       update();
       final isLastPage =
           companiesResponse.currentPage! >= companiesResponse.lastPage!;
@@ -115,7 +89,7 @@ class CompaniesController extends BaseController
         final nextPageKey = pageKey + 1;
         pagingController.appendPage(companiesResponse.data ?? [], nextPageKey);
       }
-      isLoadingCompanyList = false;
+      isLoadingCompanyList.value = false;
        update();
     } on DataFormatException catch (e) {
       if (e.toString() == 'INVALID_VALUE') {
@@ -126,20 +100,22 @@ class CompaniesController extends BaseController
     } on BadRequestException catch (_) {
       generateError(Pair(Status.error, Reason.unknown));
     } finally {
-      isLoadingCompanyList = false;
+      isLoadingCompanyList.value = false;
        update();
     }
   }
 
   void getActivityCategories() async {
-    isLoadingCategoryList = true;
+    isLoadingCategoryList.value = true;
     update();
   
     try {
+      
       Map<String, dynamic> data =
           await CompanyRepository.getActivityCategories();
-      companyCategories = CompanyCategories.fromJson(data).data ?? [];
-
+      companyCategories.assignAll(CompanyCategories.fromJson(data).data ?? []);
+      print('');
+  
   print("µµµµµµµµµµµµµµµµµµµµµµµµµµ");
         print("µµµµµµµµµµµµµµµµµµµµµµµµµµ");
     print("µµµµµµµµµµµµµµµµµµµµµµµµµµ");
@@ -152,7 +128,7 @@ class CompaniesController extends BaseController
     print("µµµµµµµµµµµµµµµµµµµµµµµµµµ");
     print("µµµµµµµµµµµµµµµµµµµµµµµµµµ");
 
-      isLoadingCategoryList = false;
+      isLoadingCategoryList.value = false;
       update();
     } on DataFormatException catch (e) {
       if (e.toString() == 'INVALID_VALUE') {

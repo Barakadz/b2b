@@ -36,9 +36,12 @@ class CompanyRepository {
         true,
    
               {
-          'pageNumber': pageNumber,
-          'search': search,
-          'categoryId': 1,
+          "pagination": {
+        "pageSize": 1,
+        "pageNumber": 2
+    },
+    "search": "",
+    "categoryId": 1
         }    ,    
       );
       print("response========================================================>$response");
@@ -155,7 +158,7 @@ class CompanyRepository {
           print("|");
       print("getActivityCategories function Start ");
       var response =
-          await Api.getRequest('$baseUrl/activityDomains', true, true, {});
+          await Api.getRequest('$baseUrl/activityCategories', true, true, {});
           print("|");
                     print("|");
           print("|");
@@ -184,6 +187,9 @@ class CompanyRepository {
 
   static Future<Map<String, dynamic>> getActivityDomainsByCategoryId(
       int categoryId) async {
+
+
+       
     try {
       // var msisdn = await Preferences.getMobileNumber();
       var response = await Api.getRequest(
@@ -218,6 +224,8 @@ class CompanyRepository {
         true,
         {},
       );
+
+      
       return json.decode(response);
     } catch (exception) {
       if (exception is DioException) {

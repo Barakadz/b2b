@@ -6,7 +6,7 @@ class CompanyDomains {
 
   factory CompanyDomains.fromJson(Map<String, dynamic> json) {
     return CompanyDomains(
-        data: ((json['data'] ?? []) as List)
+        data: ((json['result'] ?? []) as List)
             .map((e) => CompanyDomain.fromJson(e))
             .toList());
   }

@@ -6,7 +6,7 @@ class Communes {
 
   factory Communes.fromJson(Map<String, dynamic> json) {
     return Communes(
-        data: ((json['data'] ?? []) as List)
+        data: ((json['result'] ?? []) as List)
             .map((e) => Commune.fromJson(e))
             .toList());
   }

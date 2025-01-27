@@ -6,7 +6,7 @@ class Wilayas {
 
   factory Wilayas.fromJson(Map<String, dynamic> json) {
     return Wilayas(
-        data: ((json['data'] ?? []) as List)
+        data: ((json['result'] ?? []) as List)
             .map((e) => Wilaya.fromJson(e))
             .toList());
   }

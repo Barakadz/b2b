@@ -69,6 +69,7 @@ class AddCompanyController extends BaseController {
       Map<String, dynamic> data =
           await CompanyRepository.getActivityCategories();
       companyCategories.assignAll(CompanyCategories.fromJson(data).data ?? []);
+      print('');
       isLoadingCategoryList.value = false;
     } on DataFormatException catch (e) {
       if (e.toString() == 'INVALID_VALUE') {
@@ -82,9 +83,7 @@ class AddCompanyController extends BaseController {
   }
 
   onChangeSelectedCategory() {
-    domainDropdownKey.currentState?.reset();
-    selectedDomainId.value = null;
-    companyDomains.clear();
+     companyDomains.clear();
     getDomainList();
   }
 
@@ -94,7 +93,8 @@ class AddCompanyController extends BaseController {
       Map<String, dynamic> data =
           await CompanyRepository.getActivityDomainsByCategoryId(
               selectedCategoryId.value ?? 0);
-      companyDomains.assignAll(CompanyDomains.fromJson(data).data ?? []);
+      companyDomains.assignAll(CompanyDomains.fromJson(data).data ?? []); 
+
       isLoadingDomainList.value = false;
     } on DataFormatException catch (e) {
       if (e.toString() == 'INVALID_VALUE') {
@@ -112,7 +112,8 @@ class AddCompanyController extends BaseController {
     try {
       Map<String, dynamic> data = await CompanyRepository.getWilayas();
       wilayas.assignAll(Wilayas.fromJson(data).data ?? []);
-      isLoadingWilayaList.value = false;
+      
+       isLoadingWilayaList.value = false;
     } on DataFormatException catch (e) {
       if (e.toString() == 'INVALID_VALUE') {
         // generateError(Pair(Status.error, Reason.unknown));
@@ -124,14 +125,20 @@ class AddCompanyController extends BaseController {
     }
   }
 
-  onChangeSelectedWilaya() {
-    communeDropdownKey.currentState?.reset();
-    selectedCommuneId.value = null;
-    communes.clear();
-    getCommuneList();
+  onChangeSelectedWilaya() async {
+
+// Clear the previously selected commune
+   
+  // Fetch communes for the newly selected wilaya
+  //communes.clear(); // Ensure the list is reset
+ 
+    //communeDropdownKey.currentState?.reset();
+   // selectedCommuneId.value = null;
+    //communes.clear();
+   await getCommuneList();
   }
 
-  void getCommuneList() async {
+    getCommuneList() async {
     isLoadingCommuneList.value = true;
     try {
       Map<String, dynamic> data = await CompanyRepository.getCommunesByWilayaId(

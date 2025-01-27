@@ -123,261 +123,228 @@ class _CompaniesScreenState extends State<CompaniesScreen> {
     _searchController.dispose();
     super.dispose();
   }
+  final CompaniesController companiesController2 = Get.put(CompaniesController());
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.grey.shade100,
-      appBar: PreferredSize(
-        // preferredSize: const Size.fromHeight(80.0),
-        preferredSize: const Size.fromHeight(60.0),
-        child: AppBar(
-          elevation: 0,
-          backgroundColor: Get.theme.primaryColor,
-          iconTheme: const IconThemeData(color: Colors.white),
-          title: Text(
-            Get.find<NavigationPageCtrl>().getTitle(NavDrawer.companiesItem),
-            style: Get.theme.primaryTextTheme.bodyMedium
-                ?.copyWith(fontSize: 25, fontWeight: FontWeight.w600),
+ 
+@override
+Widget build(BuildContext context) {
+  return Scaffold(
+    backgroundColor: Colors.grey.shade100,
+    appBar: PreferredSize(
+      preferredSize: const Size.fromHeight(60.0),
+      child: AppBar(
+        elevation: 0,
+        backgroundColor: Get.theme.primaryColor,
+        iconTheme: const IconThemeData(color: Colors.white),
+        title: Text(
+          Get.find<NavigationPageCtrl>().getTitle(NavDrawer.companiesItem),
+          style: Get.theme.primaryTextTheme.bodyMedium?.copyWith(
+            fontSize: 25, 
+            fontWeight: FontWeight.w600
           ),
-          centerTitle: true,
         ),
+        centerTitle: true,
       ),
-      drawer: NavDrawer(),
-      body: PopScope(
-        canPop: false,
-        onPopInvoked: (val) =>
-            Get.find<NavigationPageCtrl>().setSelectedTab(NavDrawer.homeItem),
-        child: RefreshIndicator(
-          onRefresh: _refreshCompanies,
-          child: GetBuilder<CompaniesController>(
-            init: CompaniesController(),
-            builder: (companiesController2) {
-              return Container(
-                width: double.infinity,
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
-                child: Column(
-                  children: [
-                     Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Flexible(
-                          child: TextField(
-                            onChanged: (value) {
-                              //  String search = _searchController.text;
-                              companiesController2.onChangeSearch(value);
-                            },
-                            controller: _searchController,
-                            cursorColor: Colors.black87,
-                            decoration: InputDecoration(
-                              focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: Colors.grey.shade400,
-                                  width: 1,
-                                ),
-                              ),
-                              filled: true,
-                              fillColor: Colors.white,
-                              contentPadding: const EdgeInsets.symmetric(
-                                  vertical: 0.0, horizontal: 16.0),
-                              hintStyle: Get.theme.textTheme.bodyMedium
-                                  ?.copyWith(
-                                      fontSize: 15, color: Colors.black26),
-                              enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                    color: Colors.grey.shade400, width: 1.0),
-                              ),
-                              suffixIcon:
-                                  _searchController.text.trim().isNotEmpty
-                                      ? IconButton(
-                                          onPressed: _clearSearch,
-                                          icon: const Icon(Icons.clear),
-                                        )
-                                      : null,
-                              hintText: 'searchCompanies'.tr,
-                              prefixIcon: const Icon(
-                                Icons.search,
-                                color: Colors.grey,
-                              ),
-                            ),
+    ),
+    drawer: NavDrawer(),
+    body: PopScope(
+      canPop: false,
+      onPopInvoked: (val) => Get.find<NavigationPageCtrl>().setSelectedTab(NavDrawer.homeItem),
+      child: RefreshIndicator(
+        onRefresh: _refreshCompanies,
+        child: Container(
+          width: double.infinity,
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+          child: Column(
+            children: [
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Flexible(
+                    child: TextField(
+                      onChanged: (value) {
+                        companiesController2.onChangeSearch(value);
+                      },
+                      controller: _searchController,
+                      cursorColor: Colors.black87,
+                      decoration: InputDecoration(
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Colors.grey.shade400,
+                            width: 1,
                           ),
                         ),
-                      ],
+                        filled: true,
+                        fillColor: Colors.white,
+                        contentPadding: const EdgeInsets.symmetric(
+                          vertical: 0.0, horizontal: 16.0
+                        ),
+                        hintStyle: Get.theme.textTheme.bodyMedium?.copyWith(
+                          fontSize: 15, 
+                          color: Colors.black26
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Colors.grey.shade400, 
+                            width: 1.0
+                          ),
+                        ),
+                        suffixIcon: _searchController.text.trim().isNotEmpty
+                            ? IconButton(
+                                onPressed: _clearSearch,
+                                icon: const Icon(Icons.clear),
+                              )
+                            : null,
+                        hintText: 'searchCompanies'.tr,
+                        prefixIcon: const Icon(
+                          Icons.search,
+                          color: Colors.grey,
+                        ),
+                      ),
                     ),
-                    const SizedBox(
-                      height: 16,
-                    ),
-                    SizedBox(
-                      height: 34,
-                      child: companiesController2.isLoadingCategoryList
-                          ? ListView.separated(
+                  ),
+                ],
+              ),
+              const SizedBox(height: 16),
+              SizedBox(
+                height: 34,
+                child: companiesController2.isLoadingCategoryList.value
+                    ? ListView.separated(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: 5,
+                        itemBuilder: (context, index) => _buildCategoryLoader(),
+                        separatorBuilder: (context, index) => const SizedBox(width: 6),
+                      )
+                    : companiesController2.companyCategories.isNotEmpty
+                        ? Obx(() =>                      ListView.separated(
                               scrollDirection: Axis.horizontal,
-                              itemCount: 5,
-                              itemBuilder: (context, index) =>
-                                  _buildCategoryLoader(),
+                              itemCount:
+                                  companiesController2.companyCategories.length,
+                              itemBuilder: (context, index) => InkWell(
+                                onTap: () {
+                                  // if (!companiesController2
+                                  //         .isLoadingCompanyList &&
+                                  //     !companiesController2
+                                  //         .isLoadingCategoryList) {
+                                  companiesController2.onChangeSelectedCategory(
+                                    companiesController2
+                                            .companyCategories[index].id ??
+                                        0,
+                                  );
+                                  // }
+                                },
+                                child: Container(
+                                  padding: const EdgeInsets.symmetric(
+                                      vertical: 6, horizontal: 8),
+                                  decoration: BoxDecoration(
+                                    color:
+                                        companiesController2.isSelectedCategory(
+                                                companiesController2
+                                                    .companyCategories[index])
+                                            ? Colors.white
+                                            : Colors.white,
+                                    borderRadius: BorderRadius.circular(6),
+                                    border: Border.all(
+                                      color: companiesController2
+                                              .isSelectedCategory(
+                                                  companiesController2
+                                                      .companyCategories[index])
+                                          ? Get.theme.primaryColor
+                                          : Colors.grey.shade400,
+                                    ),
+                                  ),
+                                  child: Center(
+                                    child: Text(
+                                      companiesController2
+                                              .companyCategories[index].name ??
+                                          '',
+                                      maxLines: 2,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 12,
+                                        letterSpacing: 1,
+                                        color: companiesController2
+                                                .isSelectedCategory(
+                                                    companiesController2
+                                                            .companyCategories[
+                                                        index])
+                                            ? Get.theme.primaryColor
+                                            : Colors.grey.shade800,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
                               separatorBuilder: (context, index) =>
                                   const SizedBox(
                                 width: 6,
                               ),
-                            )
-                          : Column(
-                            children: [
- Text('ID: ${  companiesController2.companyCategories[0].id} - Parent ID: ${  companiesController2.companyCategories[0].parentId}'),                              ListView.builder(
-        itemCount: companyCategories.length,
-        itemBuilder: (context, index) {
-          final category = companyCategories[index];
-          return ListTile(
-            leading: CircleAvatar(
-              child: Text(category.code ?? '?'),
-            ),
-            title: Text(category.name ?? 'No Name'),
-            subtitle: Text('ID: ${category.id} - Parent ID: ${category.parentId}'),
-          );
-        },
-      ),
-                              ListView.separated(
-                                  scrollDirection: Axis.horizontal,
-                                  itemCount:
-                                      companiesController2.companyCategories.length,
-                                  itemBuilder: (context, index) => InkWell(
-                                    onTap: () {
-                                      // if (!companiesController2
-                                      //         .isLoadingCompanyList &&
-                                      //     !companiesController2
-                                      //         .isLoadingCategoryList) {
-                                      companiesController2.onChangeSelectedCategory(
-                                        companiesController2
-                                                .companyCategories[index].id ??
-                                            0,
-                                      );
-                                      // }
-                                    },
-                                    child: Container(
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 6, horizontal: 8),
-                                      decoration: BoxDecoration(
-                                        color:
-                                            companiesController2.isSelectedCategory(
-                                                    companiesController2
-                                                        .companyCategories[index])
-                                                ? Colors.black
-                                                : Colors.black,
-                                        borderRadius: BorderRadius.circular(6),
-                                        border: Border.all(
-                                          color: companiesController2
-                                                  .isSelectedCategory(
-                                                      companiesController2
-                                                          .companyCategories[index])
-                                              ? Colors.red
-                                              : Colors.green,
-                                        ),
-                                      ),
-                                      child: Center(
-                                        child: Text(
-                                          companiesController2
-                                                  .companyCategories[index].name ??
-                                              '',
-                                          maxLines: 2,
-                                          overflow: TextOverflow.ellipsis,
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.w600,
-                                            fontSize: 12,
-                                            letterSpacing: 1,
-                                            color: companiesController2
-                                                    .isSelectedCategory(
-                                                        companiesController2
-                                                                .companyCategories[
-                                                            index])
-                                                ? Colors.yellow
-                                                : Colors.grey.shade800,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  separatorBuilder: (context, index) =>
-                                      const SizedBox(
-                                    width: 6,
-                                  ),
-                                ),//end listview
-                            ],
-                          ),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 5),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Skeletonizer(//package loading
-                            enabled: companiesController2.isLoadingCategoryList,
-                            child: Text(
-                              '${companiesController2.total} companies',
-                              style: const TextStyle(
-                                fontWeight: FontWeight.w700,
-                                fontSize: 12,
-                                letterSpacing: 0,
-                                color: Colors.black87,
-                              ),
                             ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 16,
-                    ),
-                    Expanded(
-                      child: PagedListView<int, Company>(
-                        shrinkWrap: false,
-                        pagingController: companiesController2.pagingController,
-                        builderDelegate: PagedChildBuilderDelegate<Company>(
-                          itemBuilder: (context, company, index) {
-                            return Column(
-                              children: [
-                                _buildCompany(companiesController2, company),
-                                const SizedBox(
-                                  height: 12,
-                                ),
-                              ],
-                            );
-                          },
-                          newPageProgressIndicatorBuilder: (context) => Column(
-                            children: [
-                              _buildCompanyLoader(),
-                              const SizedBox(
-                                height: 12,
-                              ),
-                              _buildCompanyLoader(),
-                            ],
-                          ),
-                          firstPageProgressIndicatorBuilder: (context) =>
-                              Column(
-                            children: [
-                              _buildCompanyLoader(),
-                              const SizedBox(
-                                height: 12,
-                              ),
-                              _buildCompanyLoader(),
-                            ],
-                          ),
+                    //end listview
+        )
+                        : const Center(child: Text('No categories available')),
+              ),
+              const SizedBox(height: 10),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 5),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Skeletonizer(
+                      enabled: companiesController2.isLoadingCompanyList.value,
+                      child: Text(
+                        '${companiesController2.total} companies',
+                        style: const TextStyle(
+                          fontWeight: FontWeight.w700,
+                          fontSize: 12,
+                          color: Colors.black87,
                         ),
                       ),
                     ),
                   ],
                 ),
-              );
-            },
+              ),
+              const SizedBox(height: 16),
+              Expanded(
+                child: PagedListView<int, Company>(
+                  shrinkWrap: false,
+                  pagingController: companiesController2.pagingController,
+                  builderDelegate: PagedChildBuilderDelegate<Company>(
+                    itemBuilder: (context, company, index) {
+                      return Column(
+                        children: [
+                          _buildCompany(companiesController2, company),
+                          const SizedBox(height: 12),
+                        ],
+                      );
+                    },
+                    newPageProgressIndicatorBuilder: (context) => Column(
+                      children: [
+                        _buildCompanyLoader(),
+                        const SizedBox(height: 12),
+                        _buildCompanyLoader(),
+                      ],
+                    ),
+                    firstPageProgressIndicatorBuilder: (context) => Column(
+                      children: [
+                        _buildCompanyLoader(),
+                        const SizedBox(height: 12),
+                        _buildCompanyLoader(),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
       ),
-      floatingActionButton: _buildAddOrEditCompanyBtn(),
-    );
-  }
+    ),
+    floatingActionButton: _buildAddOrEditCompanyBtn(),
+  );
+}
 
   Widget _buildAddOrEditCompanyBtn() {
     return Obx(() {

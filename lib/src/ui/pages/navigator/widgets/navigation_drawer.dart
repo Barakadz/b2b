@@ -140,7 +140,7 @@ Widget _buildDrawerItems(BuildContext context) {
     Navigator.pop(context);
   },
 ),
-        if (_authController.paymentType == 'PaymentType.prepaid')
+      //  if (_authController.paymentType == 'PaymentType.prepaid')
           _buildDrawerItem(
             icon: Icons.receipt_long_outlined,
             title: 'menuItemInvoices'.tr,

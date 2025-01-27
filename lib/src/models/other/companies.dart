@@ -9,13 +9,13 @@ class CompaniesResponse {
   CompaniesResponse({this.currentPage, this.lastPage, this.total, this.data});
 
   factory CompaniesResponse.fromJson(Map<String, dynamic> json) {
-    var meta = json['meta'] ?? {};
+    var meta = json['result']['meta'] ?? {};
 
     return CompaniesResponse(
         currentPage: meta['current_page'] ?? 0,
         lastPage: meta['last_page'] ?? 0,
         total: meta['total'] ?? 0,
-        data: ((json['data'] ?? []) as List)
+        data: ((json['result']['data'] ?? []) as List)
             .map((e) => Company.fromJson(e))
             .toList());
   }
